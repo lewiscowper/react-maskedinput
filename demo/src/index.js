@@ -12,39 +12,37 @@ const PATTERNS = [
   '1 1'
 ]
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      card: '',
-      expiry: '',
-      ccv: '',
-      plate: '',
-      escaped: '',
-      leading: '',
-      custom: '',
-      changing: '',
-      pattern: '1111 1111',
-      cardPattern: '1111 1111 1111 1111'
-    }
-  },
+class App extends React.Component {
+  state = {
+    card: '',
+    expiry: '',
+    ccv: '',
+    plate: '',
+    escaped: '',
+    leading: '',
+    custom: '',
+    changing: '',
+    pattern: '1111 1111',
+    cardPattern: '1111 1111 1111 1111'
+  };
 
-  _onChange(e) {
+  _onChange = (e) => {
     const stateChange = {}
     stateChange[e.target.name] = e.target.value
     this.setState(stateChange)
-  },
+  };
 
-  _changePattern(e) {
+  _changePattern = (e) => {
     this.setState({pattern: e.target.value})
-  },
+  };
 
-  _onCardChange(e) {
+  _onCardChange = (e) => {
     if(/^3[47]/.test(e.target.value)) {
       this.setState({cardPattern: "1111 111111 11111"})
     } else {
       this.setState({cardPattern: '1111 1111 1111 1111'})
     }
-  },
+  };
 
   render() {
     return <div className="App">
@@ -111,9 +109,9 @@ const App = React.createClass({
       <footer><a href="https://github.com/insin/react-maskedinput">Source on GitHub</a></footer>
     </div>
   }
-})
+}
 
-const CustomInput = React.createClass({
+class CustomInput extends React.Component {
   render() {
     return <MaskedInput
       mask="1111-WW-11"
@@ -129,6 +127,6 @@ const CustomInput = React.createClass({
       }
     }/>
   }
-})
+}
 
 render(<App/>, document.getElementById('demo'))
